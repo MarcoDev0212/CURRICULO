@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marco R. Barbosa - Analista de Sistemas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #2980b9;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --text-color: #333;
+            --light-text: #f8f9fa;
+            --success-color: #27ae60;
+            --border-radius: 10px;
+            --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: var(--light-text);
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23000000" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+        }
+
+        .profile-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4.5rem;
+            color: white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .contact-item i {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+        }
+
+        .linkedin {
+            margin-top: 1rem;
+        }
+
+        .linkedin a {
+            color: var(--light-text);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1.8rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 30px;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .linkedin a:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        main {
+            padding: 4rem 0;
+        }
+
+        section {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--secondary-color), var(--accent-color));
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h3 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--light-color);
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 i {
+            color: var(--secondary-color);
+        }
+
+        .professional-summary p {
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+
+        .experience-item, .education-item {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+
+        .experience-item:last-child, .education-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .experience-header, .education-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .company, .course {
+            font-weight: bold;
+            color: var(--dark-color);
+            font-size: 1.2rem;
+        }
+
+        .period, .year {
+            color: var(--accent-color);
+            font-weight: 600;
+            background: var(--light-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .position, .institution {
+            font-style: italic;
+            margin-bottom: 0.8rem;
+            color: #666;
+        }
+
+        .skill-list {
+            list-style-type: none;
+        }
+
+        .skill-list li {
+            margin-bottom: 0.8rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .skill-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--light-color);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-category h4 {
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-category h4 i {
+            color: var(--secondary-color);
+        }
+
+        .ai-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .ai-tool {
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .ai-tool:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: var(--light-text);
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 2rem;
+            clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            margin-top: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            border-radius: 4px;
+            width: 0;
+            transition: width 1.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.4rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+            
+            .experience-header, .education-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 1.8rem;
+            }
+            
+            .profile-img {
+                width: 150px;
+                height: 150px;
+                font-size: 3.5rem;
+            }
+        }
+
+        /* Animações */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Botão modo escuro */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(30deg);
+        }
+
+        /* Modo escuro */
+        body.dark-mode {
+            --primary-color: #1a1a2e;
+            --secondary-color: #4cc9f0;
+            --accent-color: #4361ee;
+            --light-color: #16213e;
+            --dark-color: #0f3460;
+            --text-color: #e0e0e0;
+            --light-text: #f8f9fa;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+        }
+
+        body.dark-mode section {
+            background-color: var(--light-color);
+        }
+
+        body.dark-mode .skill-category {
+            background: var(--dark-color);
+        }
+
+        body.dark-mode .period, body.dark-mode .year {
+            background: var(--dark-color);
+        }
+
+        /* Efeito de partículas */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Loading para PDF */
+        .pdf-loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            color: white;
+            font-size: 1.5rem;
+            display: none;
+        }
+
+        .spinner {
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 5px solid var(--secondary-color);
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Estilos para impressão/PDF */
+        @media print {
+            .theme-toggle, .download-btn, .particles {
+                display: none !important;
+            }
+            
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            
+            section {
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+                page-break-inside: avoid;
+            }
+            
+            header {
+                background: #2c3e50 !important;
+            }
+        }
+
+        /* Elementos SVG para PDF */
+        .pdf-icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="pdf-loading" id="pdfLoading">
+        <div class="spinner"></div>
+        <p>Gerando PDF...</p>
+    </div>
+
+    <div class="particles" id="particles"></div>
+
+    <header>
+        <div class="container">
+            <div class="profile-container">
+                <!-- Imagem base64 para garantir que apareça no PDF -->
+                <h1>MARCO R. BARBOSA</h1>
+                <h2>Analista de Sistemas</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <svg class="pdf-icon" viewBox="0 0 24 24" fill="#3498db">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                        <span>Porto Alegre - RS</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="pdf-icon" viewBox="0 0 24 24" fill="#3498db">
+                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                        </svg>
+                        <span>(51) 99252-0046</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="pdf-icon" viewBox="0 0 24 24" fill="#3498db">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                        <span>marco.rodriguesb021@gmail.com</span>
+                    </div>
+                </div>
+                <div class="linkedin">
+                    <a href="https://linkedin.com/in/marco-barbosa-1992201b9" target="_blank">
+                        <svg class="pdf-icon" viewBox="0 0 24 24" fill="white">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                        <span>linkedin.com/in/marco-barbosa-1992201b9</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="professional-summary fade-in">
+            <h3>
+                <svg class="pdf-icon" viewBox="0 0 24 24" fill="#3498db" width="24" height="24">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+                Resumo Profissional
+            </h3>
+            <p>Profissional com mais de 3 anos de experiência em Tecnologia da Informação, com foco em análise e suporte de sistemas. Atuação em implantação, manutenção e melhorias de sistemas corporativos, com experiência prática no atendimento remoto e presencial, utilizando ferramentas como Zoho Assist, Tomticket, TeamViewer, PowerShell, Salesforce, SAP e VPNs.</p>
+            <p>Conhecimentos sólidos em segurança da informação (LGPD, ISO 27001 e 27002) e bancos de dados (Firebird, Oracle, SQL Server).</p>
+            <p>Possuo habilidades analíticas para diagnóstico e resolução de problemas, além de boa comunicação com usuários e equipes. Estou sempre em busca de aprimoramento técnico e inovação para agregar valor aos projetos de sistemas.</p>
+        </section>
+
+        <section class="experience fade-in">
+            <h3>
+                <svg class="pdf-icon" viewBox="0 0 24 24" fill="#3498db" width="24" height="24">
+                    <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
+                </svg>
+                Experiência Profissional
+            </h3>
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="company">Ecodev - Porto Alegre, RS</div>
+                        <div class="position">Analista de Suporte Júnior</div>
+                    </div>
+                    <div class="period">Julho 2025</div>
+                </div>
+                <ul class="skill-list">
+                    <li>Suporte técnico nos sistemas ERP: <b>(Financeiro, Juridico, Emprestimos)</b></li>
+                    <li>Realizando testes nos ambientes de Produção e Homologação</li>
+                    <li>Banco de dados (MariaDB).</li>
+                    <li>Atuando na area de Segurança da Informação</li>
+                    <li>Realizando testes de segurança utilizando os sistemas: <b>(Zap, Wazuh, Kali Linux)</b></li>
+                    <li>Automação no ambiente de produção: <b>(N8N e Python)</b></li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="company">Linx - Porto Alegre, RS</div>
+                        <div class="position">Analista de Sistemas Júnior</div>
+                    </div>
+                    <div class="period">Mar 2024 - Junho 2025</div>
+                </div>
+                <ul class="skill-list">
+                    <li>Suporte técnico e análise funcional no ERP Automotivo.</li>
+                    <li>Investigação de incidentes, testes e simulações de funcionalidades.</li>
+                    <li>Desenvolvimento de scripts SQL (Oracle e SQL Server).</li>
+                    <li>Interações via TeamViewer e gestão de chamados em Salesforce.</li>
+                </ul>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="company">Sintech Sistemas de Informática - Porto Alegre, RS</div>
+                        <div class="position">Analista de Suporte / Sistemas</div>
+                    </div>
+                    <div class="period">Mai 2023 - Dez 2023</div>
+                </div>
+                <ul class="skill-list">
+                    <li>Suporte remoto N1/N2 com foco em análise de processos nos módulos do sistema (indústria, contábil, compras, etc.).</li>
+                    <li>Treinamento de usuários, documentação de processos e melhorias no sistema.</li>
+                    <li>Configuração e manutenção de banco de dados (Firebird/SQL) e servidores de aplicação.</li>
+                </ul>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="company">Grupo Feital - Cachoeirinha, RS</div>
+                        <div class="position">Assistente de TI</div>
+                    </div>
+                    <div class="period">Ago 2022 - Fev 2023</div>
+                </div>
+                <ul class="skill-list">
+                    <li>Apoio na análise e correção de falhas em sistemas internos.</li>
+                    <li>Instalação, manutenção de software, servidores e suporte aos usuários.</li>
+                    <li>Apoio às políticas de segurança da informação.</li>
+                </ul>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="company">Central de Inspeções Veicular - Porto Alegre, RS</div>
+                        <div class="position">Inspetor Técnico</div>
+                    </div>
+                    <div class="period">Mai 2015 - Set 2021</div>
+                </div>
+                <ul class="skill-list">
+                    <li>Verificação técnica de sistemas mecânicos e elétricos de veículos.</li>
+                    <li>Avaliação de conformidade conforme normativas de trânsito.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="education fade-in">
+            <h3>
+                <svg class="pdf-icon" viewBox="0 0 24 24" fill="#3498db" width="24" height="24">
+                    <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+                </svg>
+                Formação Acadêmica
+            </h3>
+            <div class="education-item">
+                <div class="education-header">
+                    <div>
+                        <div class="course">Segurança da Informação (Graduação)</div>
+                        <div class="institution">Uniasselvi</div>
+                    </div>
+                    <div class="year">2020 - 2022</div>
+                </div>
+            </div>
+            
+            <div class="education-item">
+                <div class="education-header">
+                    <div>
+                        <div class="course">Desenvolvimento de Sistemas (Técnico)</div>
+                        <div class="institution">Senac</div>
+                    </div>
+                    <div class="year">Incompleto (2022)</div>
+                </div>
+            </div>
+            
+            <div class="education-item">
+                <div class="education-header">
+                    <div>
+                        <div class="course">Testador de Software (Profissionalizante)</div>
+                        <div class="institution">Alfamedia</div>
+                    </div>
+                    <div class="year">2023</div>
+                </div>
+            </div>
+            
+            <div class="education-item">
+                <div class="education-header">
+                    <div>
+                        <div class="course">Mecânica Automotiva (Técnico)</div>
+                        <div class="institution">Senai</div>
+                    </div>
+                    <div class="year">2012 - 2014</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="skills fade-in">
+            <h3>
+                <svg class="pdf-icon" viewBox="0 0 24 24" fill="#3498db" width="24" height="24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                Competências Técnicas
+            </h3>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>
+                        <svg class="pdf-icon" viewBox="0 0 24 24" fill="#3498db" width="20" height="20">
+                            <path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/>
+                        </svg>
+                        Análise e Suporte de Sistemas
+                    </h4>
+                    <ul class="skill-list">
+                        <li>ERP (automotivo, contábil, fiscal, etc.)</li>
+                        <li>Levantamento de requisitos e testes</li>
+                        <li>Salesforce, SAP, TeamViewer, Zoho Assist</li>
+                        <li>PowerShell, SQL (Oracle, Firebird, SQL Server)</li>
+                        <li>Redes, servidores e segurança da informação (LGPD, ISO 27001/27002)</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>
+                        <svg class="pdf-icon" viewBox="0 0 24 24" fill="#3498db" width="20" height="20">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                        </svg>
+                        Tecnologias e Inteligência Artificial
+                    </h4>
+                    <p>Experiência prática no uso de ferramentas baseadas em Inteligência Artificial:</p>
+                    <div class="ai-tools">
+                        <span class="ai-tool">ChatGPT</span>
+                        <span class="ai-tool">GitHub Copilot</span>
+                        <span class="ai-tool">Gamma</span>
+                        <span class="ai-tool">Ideamap</span>
+                        <span class="ai-tool">Ado</span>
+                    </div>
+                    <p>Aplicação do ChatGPT como assistente de produtividade, suporte técnico, criação de documentação e solução de problemas.</p>
+                    <p>Conhecimento em Python, com experiência em automação de processos e desenvolvimento de interfaces gráficas, integrando soluções inteligentes para otimização de fluxos de trabalho.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>MARCO R. BARBOSA - Analista de Sistemas</p>
+            <p>Porto Alegre - RS | (51) 99252-0046 | marco.rodriguesb021@gmail.com</p>
+            <button class="download-btn" id="downloadBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                </svg>
+                Baixar Currículo em PDF
+            </button>
+        </div>
+    </footer>
+
+    <script>
+        // Animação de entrada dos elementos
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                fadeInObserver.observe(element);
+            });
+            
+            // Botão modo escuro
+            const themeToggle = document.getElementById('themeToggle');
+            themeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                const icon = themeToggle.querySelector('i');
+                if (document.body.classList.contains('dark-mode')) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            });
+
+            // Efeito de partículas
+            createParticles();
+
+            // Configuração do botão de download PDF
+            const downloadBtn = document.getElementById('downloadBtn');
+            downloadBtn.addEventListener('click', generatePDF);
+        });
+
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = Math.random() * 5 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.background = 'rgba(52, 152, 219, 0.5)';
+                particle.style.borderRadius = '50%';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.top = Math.random() * 100 + 'vh';
+                particle.style.animation = `float ${Math.random() * 10 + 10}s linear infinite`;
+                
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes float {
+                        0% { transform: translate(0, 0) rotate(0deg); }
+                        25% { transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(90deg); }
+                        50% { transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(180deg); }
+                        75% { transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(270deg); }
+                        100% { transform: translate(0, 0) rotate(360deg); }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        function generatePDF() {
+            // Mostrar loading
+            const loadingElement = document.getElementById('pdfLoading');
+            loadingElement.style.display = 'flex';
+            
+            // Elemento que será convertido para PDF
+            const element = document.body;
+            
+            // Opções de configuração do PDF
+            const opt = {
+                margin: [10, 10, 10, 10],
+                filename: 'Marco_R_Barbosa_Curriculo.pdf',
+                image: { 
+                    type: 'jpeg', 
+                    quality: 0.98 
+                },
+                html2canvas: { 
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    scrollX: 0,
+                    scrollY: 0,
+                    width: element.scrollWidth,
+                    height: element.scrollHeight,
+                    backgroundColor: '#ffffff',
+                    onclone: function(clonedDoc) {
+                        // Remover elementos que não devem aparecer no PDF
+                        const themeToggle = clonedDoc.querySelector('.theme-toggle');
+                        if (themeToggle) themeToggle.style.display = 'none';
+                        
+                        const particles = clonedDoc.querySelector('.particles');
+                        if (particles) particles.style.display = 'none';
+                        
+                        const downloadBtn = clonedDoc.querySelector('.download-btn');
+                        if (downloadBtn) downloadBtn.style.display = 'none';
+                        
+                        // Garantir que os gradientes sejam renderizados
+                        const sections = clonedDoc.querySelectorAll('section');
+                        sections.forEach(section => {
+                            section.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
+                        });
+                    }
+                },
+                jsPDF: { 
+                    unit: 'mm', 
+                    format: 'a4', 
+                    orientation: 'portrait',
+                    compress: true
+                },
+                pagebreak: { 
+                    mode: ['avoid-all', 'css', 'legacy'],
+                    before: '.section-break'
+                }
+            };
+            
+            // Gerar e baixar o PDF
+            html2pdf().set(opt).from(element).save().then(() => {
+                // Esconder loading após o download
+                loadingElement.style.display = 'none';
+            }).catch(error => {
+                console.error('Erro ao gerar PDF:', error);
+                loadingElement.style.display = 'none';
+                alert('Erro ao gerar PDF. Tente novamente.');
+            });
+        }
+    </script>
+</body>
+</html>
